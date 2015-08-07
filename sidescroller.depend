@@ -387,9 +387,41 @@
 	"Game.hpp"
 	<iostream>
 
-1438776537 source:c:\users\joel\documents\projects\platformer\main.cpp
-	"./src/Game.hpp"
+1438832506 source:c:\users\joel\documents\projects\platformer\main.cpp
+	"./include/Game.hpp"
 
-1438774079 c:\users\joel\documents\projects\platformer\src\game.hpp
+1438831903 c:\users\joel\documents\projects\platformer\src\game.hpp
 	<SFML/Graphics.hpp>
+
+1438914378 source:c:\users\joel\documents\projects\platformer\src\game.cpp
+	"../include/Game.hpp"
+	<iostream>
+
+1438912235 c:\users\joel\documents\projects\platformer\include\game.hpp
+	<SFML/Graphics.hpp>
+	"./Player.hpp"
+
+1438912314 c:\users\joel\documents\projects\platformer\include\player.hpp
+
+1438915899 source:c:\users\joel\documents\projects\platformer\src\gsm.cpp
+	"../include/GSM.hpp"
+	<Stack>
+
+1438915275 c:\users\joel\documents\projects\platformer\include\gsm.hpp
+	"State.hpp"
+	<Stack>
+
+1438915933 c:\users\joel\documents\projects\platformer\include\state.hpp
+
+1438912303 source:c:\users\joel\documents\projects\platformer\src\player.cpp
+	"../include/Player.hpp"
+
+1438914529 source:c:\users\joel\documents\projects\platformer\src\state.cpp
+	"../include/State.hpp"
+
+1438915775 source:c:\users\joel\documents\projects\platformer\src\playstate.cpp
+	"../include/PlayState.hpp"
+
+1438915790 c:\users\joel\documents\projects\platformer\include\playstate.hpp
+	"State.hpp"
 

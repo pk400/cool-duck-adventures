@@ -1,15 +1,17 @@
-#include "Game.hpp"
+#include "../include/Game.hpp"
 #include <iostream>
-#include <SFML/Window.hpp>
 
 Game::Game() {
     this->window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE);
     this->window.setVerticalSyncEnabled(true);
+    this->window.setFramerateLimit(60);
+
+
     this->player_tex.loadFromFile("./assets/player.png");
     this->player_spr.setTexture(player_tex);
 }
 
-void Game::loop() {
+void Game::run() {
     while(this->window.isOpen()) {
         // Handle inputs
         this->processInput();
@@ -29,16 +31,14 @@ void Game::processInput() {
             this->window.close();
 
 
-        /*if(event.type == sf::Event::KeyPressed) {
+        if(event.type == sf::Event::KeyPressed) {
             switch(event.key.code) {
-                //case sf::Keyboard::W: std::cout << "W" << std::endl; this->player_spr.move(5, 5); break;
-                case sf::Keyboard::A: std::cout << "A" << std::endl; this->player_spr.move(-5, 0); break;
-                //case sf::Keyboard::S: std::cout << "S" << std::endl; break;
-                case sf::Keyboard::D: std::cout << "D" << std::endl; this->player_spr.move(5, 0); break;
+                case sf::Keyboard::A: std::cout << "A" << std::endl; break;
+                case sf::Keyboard::D: std::cout << "D" << std::endl; break;
                 case sf::Keyboard::Space: std::cout << "Space" << std::endl; break;
                 default: break;
             }
-        }*/
+        }
     }
 }
 

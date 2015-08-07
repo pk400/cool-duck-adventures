@@ -1,9 +1,9 @@
-#include "./src/Game.hpp"
+#include "./include/Game.hpp"
 
 int main()
 {
     Game game;
-    game.loop();
+    game.run();
 
     return 0;
 }

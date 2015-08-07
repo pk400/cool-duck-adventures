@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include "./Player.hpp"
 
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 480;
@@ -12,6 +13,7 @@ private:
     sf::RenderWindow window;
     sf::Texture player_tex;
     sf::Sprite player_spr;
+    Player player;
 public:
     Game();
     void run();

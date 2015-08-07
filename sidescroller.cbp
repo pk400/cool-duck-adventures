@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="Debug">
-				<Option output="bin/Debug/sidescroller" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Debug/platformer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Debug/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -23,7 +23,7 @@
 				</Linker>
 			</Target>
 			<Target title="Release">
-				<Option output="bin/Release/sidescroller" prefix_auto="1" extension_auto="1" />
+				<Option output="bin/Release/platformer" prefix_auto="1" extension_auto="1" />
 				<Option object_output="obj/Release/" />
 				<Option type="1" />
 				<Option compiler="gcc" />
@@ -59,9 +59,19 @@
 			<Add library="winmm" />
 			<Add directory="C:/SFML-2.3.1/lib" />
 		</Linker>
+		<Unit filename="include/GSM.hpp" />
+		<Unit filename="include/Game.hpp" />
+		<Unit filename="include/MenuState.hpp" />
+		<Unit filename="include/PlayState.hpp" />
+		<Unit filename="include/Player.hpp" />
+		<Unit filename="include/State.hpp" />
 		<Unit filename="main.cpp" />
+		<Unit filename="src/GSM.cpp" />
 		<Unit filename="src/Game.cpp" />
-		<Unit filename="src/Game.hpp" />
+		<Unit filename="src/MenuState.cpp" />
+		<Unit filename="src/PlayState.cpp" />
+		<Unit filename="src/Player.cpp" />
+		<Unit filename="src/State.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
