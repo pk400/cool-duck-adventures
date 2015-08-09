@@ -6,6 +6,7 @@
 class PlayState : State {
 private:
 public:
+    PlayState();
 };
 
 #endif // PLAYSTATE_HPP

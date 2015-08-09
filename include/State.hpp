@@ -2,11 +2,9 @@
 #define STATE_HPP
 
 class State {
-private:
 public:
-    State();
-    void update();
-    void render();
+    virtual void update() = 0;
+    virtual void render() = 0;
 };
 
 #endif // STATE_HPP

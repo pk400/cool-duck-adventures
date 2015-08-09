@@ -1,14 +1,19 @@
 #ifndef GSM_HPP
 #define GSM_HPP
 
-#include "State.hpp"
+#include "./MenuState.hpp"
 #include <Stack>
 
 class GSM {
 private:
-    std::stack<State> states;
+    std::stack<State*> states;
 public:
     GSM();
+    bool pushState(State* s);
+    bool popState();
+    int getNumberOfStates();
+    void updateTopState();
+    void renderTopState();
 };
 
 #endif // GSM_HPP

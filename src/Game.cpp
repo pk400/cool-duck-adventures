@@ -6,9 +6,8 @@ Game::Game() {
     this->window.setVerticalSyncEnabled(true);
     this->window.setFramerateLimit(60);
 
-
-    this->player_tex.loadFromFile("./assets/player.png");
-    this->player_spr.setTexture(player_tex);
+    // Initialize the state manager
+    this->gsm = new GSM();
 }
 
 void Game::run() {
@@ -43,10 +42,9 @@ void Game::processInput() {
 }
 
 void Game::update() {
+    this->gsm->updateTopState();
 }
 
 void Game::render() {
-    this->window.clear();
-    this->window.draw(player_spr);
-    this->window.display();
+    this->gsm->renderTopState();
 }

@@ -2,6 +2,7 @@
 #define GAME_HPP
 
 #include <SFML/Graphics.hpp>
+#include "./GSM.hpp"
 #include "./Player.hpp"
 
 const int WINDOW_WIDTH = 800;
@@ -11,9 +12,7 @@ const std::string GAME_TITLE = "Sidescroller";
 class Game {
 private:
     sf::RenderWindow window;
-    sf::Texture player_tex;
-    sf::Sprite player_spr;
-    Player player;
+    GSM* gsm;
 public:
     Game();
     void run();

@@ -71,7 +71,6 @@
 		<Unit filename="src/MenuState.cpp" />
 		<Unit filename="src/PlayState.cpp" />
 		<Unit filename="src/Player.cpp" />
-		<Unit filename="src/State.cpp" />
 		<Extensions>
 			<code_completion />
 			<envvars />
