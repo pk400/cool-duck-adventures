@@ -7,7 +7,7 @@ Game::Game() {
     this->window.setFramerateLimit(60);
 
     // Initialize the state manager
-    this->gsm = new GSM();
+    this->gsm = new GSM(this->window);
 }
 
 void Game::run() {
