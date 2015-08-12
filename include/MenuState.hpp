@@ -1,17 +1,17 @@
 #ifndef MENUSTATE_HPP
 #define MENUSTATE_HPP
 
-#include <SFML/Graphics.hpp>
 #include "./State.hpp"
 
 class MenuState : public State {
 private:
-    sf::Font font;
-    sf::Text game_title;
+    sf::Text* menu_start;
 public:
     MenuState();
+    void loadText();
+    int processInput(sf::Event);
     void update();
-    void render();
+    void render(sf::RenderWindow&);
 };
 
 #endif // MENUSTATE_HPP

@@ -393,26 +393,26 @@
 1438831903 c:\users\joel\documents\projects\platformer\src\game.hpp
 	<SFML/Graphics.hpp>
 
-1439251086 source:c:\users\joel\documents\projects\platformer\src\game.cpp
+1439355629 source:c:\users\joel\documents\projects\platformer\src\game.cpp
 	"../include/Game.hpp"
 	<iostream>
 
-1439142563 c:\users\joel\documents\projects\platformer\include\game.hpp
-	<SFML/Graphics.hpp>
+1439364119 c:\users\joel\documents\projects\platformer\include\game.hpp
 	"./GSM.hpp"
 	"./Player.hpp"
 
 1438912314 c:\users\joel\documents\projects\platformer\include\player.hpp
 
-1439251251 source:c:\users\joel\documents\projects\platformer\src\gsm.cpp
+1439361035 source:c:\users\joel\documents\projects\platformer\src\gsm.cpp
 	"../include/GSM.hpp"
-	<iostream>
 
-1439251228 c:\users\joel\documents\projects\platformer\include\gsm.hpp
+1439357079 c:\users\joel\documents\projects\platformer\include\gsm.hpp
 	"./MenuState.hpp"
+	"./PlayState.hpp"
 	<Stack>
 
-1439142563 c:\users\joel\documents\projects\platformer\include\state.hpp
+1439364038 c:\users\joel\documents\projects\platformer\include\state.hpp
+	<SFML/Graphics.hpp>
 
 1438912303 source:c:\users\joel\documents\projects\platformer\src\player.cpp
 	"../include/Player.hpp"
@@ -420,17 +420,17 @@
 1439090715 source:c:\users\joel\documents\projects\platformer\src\state.cpp
 	"../include/State.hpp"
 
-1439142563 source:c:\users\joel\documents\projects\platformer\src\playstate.cpp
+1439364212 source:c:\users\joel\documents\projects\platformer\src\playstate.cpp
+	"../include/Game.hpp"
 	"../include/PlayState.hpp"
 
-1439142563 c:\users\joel\documents\projects\platformer\include\playstate.hpp
+1439361645 c:\users\joel\documents\projects\platformer\include\playstate.hpp
 	"State.hpp"
 
-1439092935 source:c:\users\joel\documents\projects\platformer\src\menustate.cpp
+1439364069 source:c:\users\joel\documents\projects\platformer\src\menustate.cpp
+	"../include/Game.hpp"
 	"../include/MenuState.hpp"
-	<iostream>
 
-1439251307 c:\users\joel\documents\projects\platformer\include\menustate.hpp
-	<SFML/Graphics.hpp>
+1439364123 c:\users\joel\documents\projects\platformer\include\menustate.hpp
 	"./State.hpp"
 

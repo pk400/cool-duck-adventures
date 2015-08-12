@@ -1,8 +1,6 @@
 #include "../include/GSM.hpp"
-#include <iostream>
 
 GSM::GSM() {
-    std::cout << "GSM CREATED" << std::endl;
     State* menu = new MenuState();
     states.push(menu);
 }
@@ -26,10 +24,29 @@ int GSM::getNumberOfStates() {
     return states.size();
 }
 
+void GSM::processInputFromState(sf::Event event) {
+    switch(states.top()->processInput(event)) {
+        case 1: {
+            State* playstate = new PlayState();
+            states.pop();
+            states.push(playstate);
+            break;
+        }
+        case 2: {
+            State* menu = new MenuState();
+            states.pop();
+            states.push(menu);
+            break;
+        }
+        case 0: break;
+        default: break;
+    }
+}
+
 void GSM::updateTopState() {
     states.top()->update();
 }
 
-void GSM::renderTopState() {
-    states.top()->render();
+void GSM::renderTopState(sf::RenderWindow& win) {
+    states.top()->render(win);
 }

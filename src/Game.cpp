@@ -3,11 +3,9 @@
 
 Game::Game() {
     this->window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE);
-    this->window.setVerticalSyncEnabled(true);
-    this->window.setFramerateLimit(60);
 
     // Initialize the state manager
-    this->gsm = new GSM(this->window);
+    this->gsm = new GSM();
 }
 
 void Game::run() {
@@ -29,15 +27,7 @@ void Game::processInput() {
         if(event.type == sf::Event::Closed)
             this->window.close();
 
-
-        if(event.type == sf::Event::KeyPressed) {
-            switch(event.key.code) {
-                case sf::Keyboard::A: std::cout << "A" << std::endl; break;
-                case sf::Keyboard::D: std::cout << "D" << std::endl; break;
-                case sf::Keyboard::Space: std::cout << "Space" << std::endl; break;
-                default: break;
-            }
-        }
+        this->gsm->processInputFromState(event);
     }
 }
 
@@ -46,5 +36,7 @@ void Game::update() {
 }
 
 void Game::render() {
-    this->gsm->renderTopState();
+    this->window.clear();
+    this->gsm->renderTopState(this->window);
+    this->window.display();
 }

@@ -2,6 +2,7 @@
 #define GSM_HPP
 
 #include "./MenuState.hpp"
+#include "./PlayState.hpp"
 #include <Stack>
 
 class GSM {
@@ -12,8 +13,9 @@ public:
     bool pushState(State* s);
     bool popState();
     int getNumberOfStates();
+    void processInputFromState(sf::Event);
     void updateTopState();
-    void renderTopState();
+    void renderTopState(sf::RenderWindow&);
 };
 
 #endif // GSM_HPP
