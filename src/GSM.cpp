@@ -1,8 +1,12 @@
 #include "../include/GSM.hpp"
 
+State* menustate;
+State* playstate;
+
 GSM::GSM() {
-    State* menu = new MenuState();
-    states.push(menu);
+    menustate = new MenuState();
+    playstate = new PlayState();
+    states.push(menustate);
 }
 
 bool GSM::pushState(State* s) {
@@ -27,15 +31,12 @@ int GSM::getNumberOfStates() {
 void GSM::processInputFromState(sf::Event event) {
     switch(states.top()->processInput(event)) {
         case 1: {
-            State* playstate = new PlayState();
             states.pop();
             states.push(playstate);
             break;
         }
         case 2: {
-            State* menu = new MenuState();
-            states.pop();
-            states.push(menu);
+            states.push(menustate);
             break;
         }
         case 0: break;

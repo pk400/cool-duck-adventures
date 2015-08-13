@@ -2,6 +2,7 @@
 #include "../include/PlayState.hpp"
 
 PlayState::PlayState() {
+    player = new Player();
     loadText();
 }
 
@@ -19,6 +20,7 @@ int PlayState::processInput(sf::Event event) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
         debug_str += 'A';
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+        player->move(3);
         debug_str += 'D';
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         debug_str += "Spacebar";
@@ -37,4 +39,5 @@ void PlayState::update() {
 void PlayState::render(sf::RenderWindow& win) {
     win.draw(*debug_state);
     win.draw(*debug_input);
+    player->draw(win);
 }

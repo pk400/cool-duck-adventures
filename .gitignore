@@ -43,3 +43,9 @@ Temporary Items
 .apdisk
 *.o
 *.o
+
+# CODE::BLOCK STUFF
+*.depend
+*.layout
+*.cbp
+*.gitattributes

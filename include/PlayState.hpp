@@ -1,10 +1,12 @@
 #ifndef PLAYSTATE_HPP
 #define PLAYSTATE_HPP
 
-#include "State.hpp"
+#include "./State.hpp"
+#include "./Player.hpp"
 
 class PlayState : public State {
 private:
+    Player* player;
     sf::Text* debug_state;
     sf::Text* debug_input;
 public:
