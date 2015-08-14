@@ -5,7 +5,6 @@ State* playstate;
 
 GSM::GSM() {
     menustate = new MenuState();
-    playstate = new PlayState();
     states.push(menustate);
 }
 
@@ -31,6 +30,7 @@ int GSM::getNumberOfStates() {
 void GSM::processInputFromState(sf::Event event) {
     switch(states.top()->processInput(event)) {
         case 1: {
+            playstate = new PlayState();
             states.pop();
             states.push(playstate);
             break;

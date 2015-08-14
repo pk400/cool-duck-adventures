@@ -2,10 +2,12 @@
 #define STATE_HPP
 
 #include <SFML/Graphics.hpp>
+#include <iostream>
 
 const int WINDOW_WIDTH = 800;
 const int WINDOW_HEIGHT = 480;
 const std::string GAME_TITLE = "Platformer";
+const int DEBUG_TEXT_OFFSET = 100;
 
 const std::string DEBUG_STR = "State: ";
 

@@ -7,11 +7,16 @@ PlayState::PlayState() {
 }
 
 void PlayState::loadText() {
+    int text_height;
+
     debug_state = new sf::Text("State: Play State", font, 12);
-    debug_state->setPosition(WINDOW_WIDTH - 100, 0);
+    debug_state->setPosition(WINDOW_WIDTH - DEBUG_TEXT_OFFSET, 0);
+    text_height = debug_state->getLocalBounds().height;
 
     debug_input = new sf::Text("Input: ", font, 12);
-    debug_input->setPosition(WINDOW_WIDTH - 100, debug_state->getLocalBounds().height);
+    debug_input->setPosition(WINDOW_WIDTH - DEBUG_TEXT_OFFSET, text_height * 1);
+
+    player->loadText(font, text_height * 2);
 }
 
 int PlayState::processInput(sf::Event event) {
