@@ -4,12 +4,13 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 
-const int WINDOW_WIDTH = 800;
-const int WINDOW_HEIGHT = 480;
-const std::string GAME_TITLE = "Platformer";
-const int DEBUG_TEXT_OFFSET = 100;
-
-const std::string DEBUG_STR = "State: ";
+const int WINDOW_WIDTH          = 800;
+const int WINDOW_HEIGHT         = 480;
+const int DEBUG_TEXT_OFFSET     = 100;
+const int DEBUG_TEXT_SIZE       = 12;
+const int DEBUG_TEXT_PADDING    = 12;
+const std::string GAME_TITLE    = "Platformer";
+const std::string DEBUG_STR     = "State: ";
 
 class State {
 protected:
@@ -18,7 +19,7 @@ protected:
 public:
     State() {
         font.loadFromFile("./assets/arial.ttf");
-        debug_state = new sf::Text(DEBUG_STR, font, 12);
+        debug_state = new sf::Text(DEBUG_STR, font, DEBUG_TEXT_SIZE);
         debug_state->setPosition(WINDOW_WIDTH - 100, 0);
     }
     virtual void loadText() = 0;

@@ -7,25 +7,30 @@ PlayState::PlayState() {
 }
 
 void PlayState::loadText() {
-    int text_height;
+    int text_height = 0;
 
-    debug_state = new sf::Text("State: Play State", font, 12);
-    debug_state->setPosition(WINDOW_WIDTH - DEBUG_TEXT_OFFSET, 0);
-    text_height = debug_state->getLocalBounds().height;
+    // DEBUG STATE TEXT
+    debug_state = new sf::Text("State: Play State", font, DEBUG_TEXT_SIZE);
+    debug_state->setPosition(WINDOW_WIDTH - DEBUG_TEXT_OFFSET, text_height);
+    text_height += DEBUG_TEXT_PADDING;
 
-    debug_input = new sf::Text("Input: ", font, 12);
-    debug_input->setPosition(WINDOW_WIDTH - DEBUG_TEXT_OFFSET, text_height * 1);
+    // DEBUG INPUT TEXT
+    debug_input = new sf::Text("Input: ", font, DEBUG_TEXT_SIZE);
+    debug_input->setPosition(WINDOW_WIDTH - DEBUG_TEXT_OFFSET, text_height);
+    text_height += DEBUG_TEXT_PADDING;
 
-    player->loadText(font, text_height * 2);
+    // LOAD PLAYER INPUT TEXT
+    player->loadText(font, text_height);
 }
 
 int PlayState::processInput(sf::Event event) {
     std::string debug_str = "Input: ";
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+        player->move(1);
         debug_str += 'A';
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        player->move(3);
+        player->move(2);
         debug_str += 'D';
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         debug_str += "Spacebar";
