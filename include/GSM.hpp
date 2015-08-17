@@ -3,7 +3,7 @@
 
 #include "./MenuState.hpp"
 #include "./PlayState.hpp"
-#include <Stack>
+#include <stack>
 
 class GSM {
 private:
