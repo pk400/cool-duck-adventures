@@ -27,8 +27,8 @@ int GSM::getNumberOfStates() {
     return states.size();
 }
 
-void GSM::processInputFromState(sf::Event event) {
-    switch(states.top()->processInput(event)) {
+void GSM::processInputFromState(sf::Event event, float dt) {
+    switch(states.top()->processInput(event, dt)) {
         case 1: {
             playstate = new PlayState();
             states.pop();

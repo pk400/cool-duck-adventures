@@ -11,7 +11,7 @@ private:
 public:
     Game();
     void run();
-    void processInput();
+    void processInput(float);
     void update();
     void render();
 };

@@ -13,7 +13,7 @@ public:
     bool pushState(State* s);
     bool popState();
     int getNumberOfStates();
-    void processInputFromState(sf::Event);
+    void processInputFromState(sf::Event, float);
     void updateTopState();
     void renderTopState(sf::RenderWindow&);
 };

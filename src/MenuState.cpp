@@ -13,7 +13,7 @@ void MenuState::loadText() {
     menu_start->setPosition(WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 2) - (menu_start->getLocalBounds().height));
 }
 
-int MenuState::processInput(sf::Event event) {
+int MenuState::processInput(sf::Event event, float dt) {
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         int mouse_x = event.mouseButton.x;
         int mouse_y = event.mouseButton.y;

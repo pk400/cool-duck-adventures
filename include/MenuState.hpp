@@ -9,7 +9,7 @@ private:
 public:
     MenuState();
     void loadText();
-    int processInput(sf::Event);
+    int processInput(sf::Event, float);
     void update();
     void render(sf::RenderWindow&);
 };

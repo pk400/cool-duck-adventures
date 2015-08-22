@@ -3,6 +3,7 @@
 
 #include <SFML/Graphics.hpp>
 #include <iostream>
+using namespace std;
 
 const int WINDOW_WIDTH          = 800;
 const int WINDOW_HEIGHT         = 480;
@@ -23,7 +24,7 @@ public:
         debug_state->setPosition(WINDOW_WIDTH - 100, 0);
     }
     virtual void loadText() = 0;
-    virtual int processInput(sf::Event) = 0;
+    virtual int processInput(sf::Event, float) = 0;
     virtual void update() = 0;
     virtual void render(sf::RenderWindow&) = 0;
 };

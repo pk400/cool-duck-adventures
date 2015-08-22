@@ -23,14 +23,15 @@ void PlayState::loadText() {
     player->loadText(font, text_height);
 }
 
-int PlayState::processInput(sf::Event event) {
+int PlayState::processInput(sf::Event event, float dt) {
     std::string debug_str = "Input: ";
 
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        player->move(1);
+        //player->move(1);
         debug_str += 'A';
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        player->move(2);
+        //player->move(2);
+        player->move_right(dt);
         debug_str += 'D';
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
         debug_str += "Spacebar";
@@ -44,6 +45,7 @@ int PlayState::processInput(sf::Event event) {
 }
 
 void PlayState::update() {
+    player->update();
 }
 
 void PlayState::render(sf::RenderWindow& win) {
