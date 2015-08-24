@@ -8,10 +8,13 @@ class Game {
 private:
     sf::RenderWindow window;
     GSM* gsm;
+    int numFrames;
+    sf::Font font;
+    sf::Text fps_text;
 public:
     Game();
     void run();
-    void processInput(float);
+    void handleEvents(float);
     void update();
     void render();
 };

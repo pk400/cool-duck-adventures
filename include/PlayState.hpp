@@ -9,11 +9,11 @@ private:
     Player* player;
     sf::Text* debug_input;
 public:
-    PlayState();
+    PlayState(sf::RenderWindow& window);
     void loadDebugText();
     int processInput(sf::Event, float);
     void update();
-    void render(sf::RenderWindow&);
+    void render();
 };
 
 #endif // PLAYSTATE_HPP

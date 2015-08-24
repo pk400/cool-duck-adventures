@@ -7,13 +7,15 @@ MenuState::MenuState() {
 
 void MenuState::addButtons() {
     int inc = 0;
+    float startPosX = 100.f;
+    float startPosY = 100.f;
+    sf::Vector2f pos(startPosX, startPosY);
 
     buttons_.push_back(new sf::Text("START"   , font, 30));
     buttons_.push_back(new sf::Text("Options" , font, 30));
     buttons_.push_back(new sf::Text("Help"    , font, 30));
     buttons_.push_back(new sf::Text("Exit"    , font, 30));
 
-    sf::Vector2f pos(5.f, 5.f);
     for(auto btn : buttons_) {
         btn->setPosition(pos);
         pos.y += 40.f;
@@ -33,9 +35,11 @@ int MenuState::processInput(sf::Event event, float dt) {
 
 void MenuState::update() {}
 
-void MenuState::render(sf::RenderWindow& window) {
+
+
+void MenuState::render() {
     for(auto btn : buttons_) {
-        window.draw(*btn);
+        window_.draw(*btn);
     }
 }
 

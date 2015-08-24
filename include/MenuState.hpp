@@ -5,14 +5,19 @@
 
 class MenuState : public State {
 private:
-    enum ButtonKeys { START, OPTIONS, HELP, EXIT };
+    enum ButtonKeys {
+        START,
+        OPTIONS,
+        HELP,
+        EXIT
+    };
     vector<sf::Text*> buttons_;
 public:
     MenuState();
     void addButtons();
     int processInput(sf::Event event, float dt);
     void update();
-    void render(sf::RenderWindow& window);
+    void render();
 
     // Button Manager
     bool checkButtonBoundaries(int key, sf::Vector2f mouse);

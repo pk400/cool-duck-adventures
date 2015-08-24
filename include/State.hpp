@@ -13,7 +13,7 @@ enum DebugEnum {
     PLAY
 };
 
-const DebugEnum DEBUG_MODE      = MENU;
+const DebugEnum DEBUG_MODE      = PLAY;
 const int WINDOW_WIDTH          = 800;
 const int WINDOW_HEIGHT         = 480;
 const int DEBUG_TEXT_OFFSET     = 100;
@@ -25,15 +25,17 @@ const std::string DEBUG_STR     = "State: ";
 
 class State {
 protected:
+    sf::RenderWindow& window_;
     sf::Font font;
-public:
-    State() {
+    State(sf::RenderWindow& window) :
+        window_(window) {
         font.loadFromFile("./assets/arial.ttf");
     }
+public:
     //virtual void loadDebugText() = 0;
     virtual int processInput(sf::Event, float) = 0;
     virtual void update() = 0;
-    virtual void render(sf::RenderWindow&) = 0;
+    virtual void render() = 0;
 };
 
 #endif // STATE_HPP

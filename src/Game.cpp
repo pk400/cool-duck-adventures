@@ -4,40 +4,49 @@
 
 Game::Game() {
     this->window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE);
-    this->window.setFramerateLimit(60);
+    this->window.setVerticalSyncEnabled(true);
+    this->window.setFramerateLimit(30);
+
+    numFrames = 0;
+    font.loadFromFile("./assets/arial.ttf");
+    fps_text.setFont(font);
+    fps_text.setPosition(5.f, 5.f);
+    fps_text.setCharacterSize(12);
 
     // Initialize the state manager
-    this->gsm = new GSM();
+    this->gsm = new GSM(window);
 }
 
 void Game::run() {
     sf::Clock clock;
+    sf::Time lastUpdate = sf::Time::Zero;
 
     while(this->window.isOpen()) {
-        float dt = clock.restart().asSeconds();
+        sf::Time dt = clock.restart();
+        lastUpdate += dt;
 
-        dt *= 100.f;
+        while(lastUpdate > FPS) {
+            lastUpdate -= FPS;
+            this->handleEvents(FPS.asSeconds());
+            this->update();
 
+            stringstream ss;
+            ss << "Frame: " << numFrames++;
+            ss << "\nDelta Time: " << lastUpdate.asSeconds();
+            fps_text.setString(ss.str());
+        }
 
-        // Handle inputs
-        this->processInput(dt);
-
-        // Handle update
-        this->update();
-
-        // Handle render
         this->render();
     }
 }
 
-void Game::processInput(float dt) {
+void Game::handleEvents(float dt) {
     sf::Event event;
     while(this->window.pollEvent(event)) {
         if(event.type == sf::Event::Closed)
             this->window.close();
-
-        this->gsm->processInputFromState(event, dt);
     }
+    this->gsm->processInputFromState(event, dt);
 }
 
 void Game::update() {
@@ -46,6 +55,9 @@ void Game::update() {
 
 void Game::render() {
     this->window.clear();
-    this->gsm->renderTopState(this->window);
+
+    this->gsm->renderTopState();
+    this->window.draw(fps_text);
+
     this->window.display();
 }

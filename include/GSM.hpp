@@ -7,15 +7,16 @@
 
 class GSM {
 private:
+    sf::RenderWindow& window_;
     std::stack<State*> states_;
 public:
-    GSM();
+    GSM(sf::RenderWindow& window);
     void pushState(State* s);
     void popState();
     int getNumberOfStates();
     void processInputFromState(sf::Event, float);
     void updateTopState();
-    void renderTopState(sf::RenderWindow&);
+    void renderTopState();
 };
 
 #endif // GSM_HPP

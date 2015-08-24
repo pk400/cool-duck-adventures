@@ -3,7 +3,8 @@
 State* menustate;
 State* playstate;
 
-GSM::GSM() {
+GSM::GSM(sf::RenderWindow& window) :
+    window_(window) {
     switch(DEBUG_MODE) {
         case DEFAULT: {
             menustate = new MenuState();
@@ -18,7 +19,7 @@ GSM::GSM() {
         }
 
         case PLAY: {
-            playstate = new PlayState();
+            playstate = new PlayState(window_);
             states_.push(playstate);
             break;
         }
@@ -41,7 +42,7 @@ int GSM::getNumberOfStates() {
 void GSM::processInputFromState(sf::Event event, float dt) {
     switch(states_.top()->processInput(event, dt)) {
         case 1: {
-            playstate = new PlayState();
+            playstate = new PlayState(window_);
             states_.pop();
             states_.push(playstate);
             break;
@@ -59,6 +60,6 @@ void GSM::updateTopState() {
     states_.top()->update();
 }
 
-void GSM::renderTopState(sf::RenderWindow& win) {
-    states_.top()->render(win);
+void GSM::renderTopState() {
+    states_.top()->render();
 }
