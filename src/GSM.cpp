@@ -4,39 +4,50 @@ State* menustate;
 State* playstate;
 
 GSM::GSM() {
-    menustate = new MenuState();
-    states.push(menustate);
-}
+    switch(DEBUG_MODE) {
+        case DEFAULT: {
+            menustate = new MenuState();
+            states_.push(menustate);
+            break;
+        }
 
-bool GSM::pushState(State* s) {
-    states.push(s);
-    if(states.size() > 0)
-        return true;
-    return false;
-}
+        case MENU: {
+            menustate = new MenuState();
+            states_.push(menustate);
+            break;
+        }
 
-bool GSM::popState() {
-    if(states.size() > 0){
-        states.pop();
-        return true;
+        case PLAY: {
+            playstate = new PlayState();
+            states_.push(playstate);
+            break;
+        }
     }
-    return false;
+}
+
+void GSM::pushState(State* state) {
+    states_.push(state);
+}
+
+void GSM::popState() {
+    //TODO: Possibly add an exception handler here in case no states to pop
+    states_.pop();
 }
 
 int GSM::getNumberOfStates() {
-    return states.size();
+    return states_.size();
 }
 
 void GSM::processInputFromState(sf::Event event, float dt) {
-    switch(states.top()->processInput(event, dt)) {
+    switch(states_.top()->processInput(event, dt)) {
         case 1: {
             playstate = new PlayState();
-            states.pop();
-            states.push(playstate);
+            states_.pop();
+            states_.push(playstate);
             break;
         }
         case 2: {
-            states.push(menustate);
+            states_.push(menustate);
             break;
         }
         case 0: break;
@@ -45,9 +56,9 @@ void GSM::processInputFromState(sf::Event event, float dt) {
 }
 
 void GSM::updateTopState() {
-    states.top()->update();
+    states_.top()->update();
 }
 
 void GSM::renderTopState(sf::RenderWindow& win) {
-    states.top()->render(win);
+    states_.top()->render(win);
 }

@@ -2,26 +2,30 @@
 #include "../include/MenuState.hpp"
 
 MenuState::MenuState() {
-    loadText();
+    addButtons();
 }
 
-void MenuState::loadText() {
-    debug_state->setString(DEBUG_STR + "Menu State");
+void MenuState::addButtons() {
+    int inc = 0;
 
-    menu_start = new sf::Text("START", font, 30);
-    menu_start->setOrigin(menu_start->getLocalBounds().width / 2, menu_start->getLocalBounds().height / 2);
-    menu_start->setPosition(WINDOW_WIDTH / 2, (WINDOW_HEIGHT / 2) - (menu_start->getLocalBounds().height));
+    buttons_.push_back(new sf::Text("START"   , font, 30));
+    buttons_.push_back(new sf::Text("Options" , font, 30));
+    buttons_.push_back(new sf::Text("Help"    , font, 30));
+    buttons_.push_back(new sf::Text("Exit"    , font, 30));
+
+    sf::Vector2f pos(5.f, 5.f);
+    for(auto btn : buttons_) {
+        btn->setPosition(pos);
+        pos.y += 40.f;
+    }
 }
 
 int MenuState::processInput(sf::Event event, float dt) {
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        int mouse_x = event.mouseButton.x;
-        int mouse_y = event.mouseButton.y;
-
-        if(mouse_x > menu_start->getGlobalBounds().left && mouse_x < menu_start->getGlobalBounds().left + menu_start->getLocalBounds().width &&
-           mouse_y > menu_start->getGlobalBounds().top && mouse_y < menu_start->getGlobalBounds().top + menu_start->getLocalBounds().height) {
-            return 1;
-        }
+        if(checkButtonBoundaries(START, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
+        if(checkButtonBoundaries(OPTIONS, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
+        if(checkButtonBoundaries(HELP, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
+        if(checkButtonBoundaries(EXIT, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
     }
 
     return 0;
@@ -29,8 +33,20 @@ int MenuState::processInput(sf::Event event, float dt) {
 
 void MenuState::update() {}
 
-void MenuState::render(sf::RenderWindow& win) {
-    win.draw(*debug_state);
-    win.draw(*menu_start);
+void MenuState::render(sf::RenderWindow& window) {
+    for(auto btn : buttons_) {
+        window.draw(*btn);
+    }
 }
 
+bool MenuState::checkButtonBoundaries(int key, sf::Vector2f mouse) {
+    sf::Text* btn = buttons_.at(key);
+
+    sf::Vector2f width(btn->getGlobalBounds().left, btn->getGlobalBounds().left + btn->getGlobalBounds().width);
+    sf::Vector2f height(btn->getGlobalBounds().top, btn->getGlobalBounds().top + btn->getGlobalBounds().height);
+
+    if(mouse.x > width.x && mouse.x < width.y
+       && mouse.y > height.x && mouse.y < height.y)
+        return true;
+    return false;
+}

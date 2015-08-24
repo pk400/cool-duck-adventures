@@ -5,13 +5,17 @@
 
 class MenuState : public State {
 private:
-    sf::Text* menu_start;
+    enum ButtonKeys { START, OPTIONS, HELP, EXIT };
+    vector<sf::Text*> buttons_;
 public:
     MenuState();
-    void loadText();
-    int processInput(sf::Event, float);
+    void addButtons();
+    int processInput(sf::Event event, float dt);
     void update();
-    void render(sf::RenderWindow&);
+    void render(sf::RenderWindow& window);
+
+    // Button Manager
+    bool checkButtonBoundaries(int key, sf::Vector2f mouse);
 };
 
 #endif // MENUSTATE_HPP

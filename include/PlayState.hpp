@@ -7,11 +7,10 @@
 class PlayState : public State {
 private:
     Player* player;
-    sf::Text* debug_state;
     sf::Text* debug_input;
 public:
     PlayState();
-    void loadText();
+    void loadDebugText();
     int processInput(sf::Event, float);
     void update();
     void render(sf::RenderWindow&);

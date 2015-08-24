@@ -7,11 +7,11 @@
 
 class GSM {
 private:
-    std::stack<State*> states;
+    std::stack<State*> states_;
 public:
     GSM();
-    bool pushState(State* s);
-    bool popState();
+    void pushState(State* s);
+    void popState();
     int getNumberOfStates();
     void processInputFromState(sf::Event, float);
     void updateTopState();

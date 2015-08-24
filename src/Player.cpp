@@ -11,28 +11,22 @@ Player::Player() :
     sprite.setPosition(position);
 }
 
-void Player::loadText(sf::Font f, int textpos) {
-    this->font = f;
+void Player::loadText(sf::Font font) {
+    font_ = font;
+
+    debugPlayerState_ = new sf::Text("State: ", font_, DEBUG_TEXT_SIZE);
+    debugPlayerState_->setPosition(5.f, 5.f);
+    debugPlayerState_->setStyle(sf::Text::Style::Bold);
 }
 
 void Player::move_right(float dt) {
-    //cout << position.x << " : ";
 
-    stringstream ss;
-    ss << position.x << " : " << velocity.x << " : " << dt;
-    cout << ss.str() << endl;
-
-    position.x += (velocity.x * dt);
-    //position.x += 0.5;
-
-    //cout << position.x << endl;
-    sprite.setPosition(position);
 }
 
 void Player::update() {
+
 }
 
 void Player::draw(sf::RenderWindow& win) {
     win.draw(sprite);
-    //win.draw(*debug_velocity);
 }
