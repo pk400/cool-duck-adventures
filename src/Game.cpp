@@ -3,9 +3,9 @@
 #include <sstream>
 
 Game::Game() {
-    this->window.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE);
-    this->window.setVerticalSyncEnabled(true);
-    this->window.setFramerateLimit(30);
+    window_.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE);
+    window_.setVerticalSyncEnabled(true);
+    window_.setFramerateLimit(30);
 
     numFrames = 0;
     font.loadFromFile("./assets/arial.ttf");
@@ -14,14 +14,14 @@ Game::Game() {
     fps_text.setCharacterSize(12);
 
     // Initialize the state manager
-    this->gsm = new GSM(window);
+    gsm = new GSM();
 }
 
 void Game::run() {
     sf::Clock clock;
     sf::Time lastUpdate = sf::Time::Zero;
 
-    while(this->window.isOpen()) {
+    while(this->window_.isOpen()) {
         sf::Time dt = clock.restart();
         lastUpdate += dt;
 
@@ -42,11 +42,18 @@ void Game::run() {
 
 void Game::handleEvents(float dt) {
     sf::Event event;
-    while(this->window.pollEvent(event)) {
+    while(window_.pollEvent(event)) {
         if(event.type == sf::Event::Closed)
-            this->window.close();
+            window_.close();
     }
-    this->gsm->processInputFromState(event, dt);
+
+    switch(gsm->processInputFromState(event, sf::Mouse::getPosition(window_), dt)) {
+        case -1: {
+            cout << "heye" << endl;
+            window_.close();
+            break;
+        }
+    }
 }
 
 void Game::update() {
@@ -54,10 +61,10 @@ void Game::update() {
 }
 
 void Game::render() {
-    this->window.clear();
+    window_.clear();
 
-    this->gsm->renderTopState();
-    this->window.draw(fps_text);
+    gsm->renderTopState(window_);
+    window_.draw(fps_text);
 
-    this->window.display();
+    window_.display();
 }

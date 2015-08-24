@@ -6,7 +6,7 @@
 
 class Game {
 private:
-    sf::RenderWindow window;
+    sf::RenderWindow window_;
     GSM* gsm;
     int numFrames;
     sf::Font font;

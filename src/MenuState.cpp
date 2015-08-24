@@ -22,24 +22,38 @@ void MenuState::addButtons() {
     }
 }
 
-int MenuState::processInput(sf::Event event, float dt) {
+int MenuState::processInput(sf::Event event, sf::Vector2i mouse, float dt) {
+    if(checkButtonBoundaries(START, sf::Vector2f(mouse)))
+        onMouseHover(START, sf::Vector2f(mouse));
+
+    if(checkButtonBoundaries(OPTIONS, sf::Vector2f(mouse)))
+        onMouseHover(OPTIONS, sf::Vector2f(mouse));
+
+    if(checkButtonBoundaries(HELP, sf::Vector2f(mouse)))
+        onMouseHover(HELP, sf::Vector2f(mouse));
+
+    if(checkButtonBoundaries(EXIT, sf::Vector2f(mouse)))
+        onMouseHover(EXIT, sf::Vector2f(mouse));
+
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
-        if(checkButtonBoundaries(START, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
-        if(checkButtonBoundaries(OPTIONS, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
-        if(checkButtonBoundaries(HELP, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
-        if(checkButtonBoundaries(EXIT, sf::Vector2f(event.mouseButton.x, event.mouseButton.y))) return 1;
+        if(checkButtonBoundaries(START  , sf::Vector2f(mouse))) return 1;
+        if(checkButtonBoundaries(OPTIONS, sf::Vector2f(mouse))) return 1;
+        if(checkButtonBoundaries(HELP   , sf::Vector2f(mouse))) return 1;
+        if(checkButtonBoundaries(EXIT   , sf::Vector2f(mouse))) return -1;
     }
 
     return 0;
 }
 
-void MenuState::update() {}
+void MenuState::update() {
+}
 
 
 
-void MenuState::render() {
+void MenuState::render(sf::RenderWindow& window) {
     for(auto btn : buttons_) {
-        window_.draw(*btn);
+        window.draw(*btn);
+        btn->setColor(sf::Color::White);
     }
 }
 
@@ -53,4 +67,10 @@ bool MenuState::checkButtonBoundaries(int key, sf::Vector2f mouse) {
        && mouse.y > height.x && mouse.y < height.y)
         return true;
     return false;
+}
+
+
+void MenuState::onMouseHover(int key, sf::Vector2f mouse) {
+    sf::Text* btn = buttons_.at(key);
+    btn->setColor(sf::Color::Red);
 }

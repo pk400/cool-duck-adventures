@@ -1,8 +1,7 @@
 #include "../include/Game.hpp"
 #include "../include/PlayState.hpp"
 
-PlayState::PlayState(sf::RenderWindow& window) :
-    window_(window) {
+PlayState::PlayState() {
     player = new Player();
 }
 
@@ -15,7 +14,7 @@ void PlayState::loadDebugText() {
     player->loadText(font);
 }
 
-int PlayState::processInput(sf::Event event, float dt) {
+int PlayState::processInput(sf::Event event, sf::Vector2i mouse, float dt) {
 
 }
 
@@ -23,7 +22,7 @@ void PlayState::update() {
     player->update();
 }
 
-void PlayState::render() {
+void PlayState::render(sf::RenderWindow& window) {
     //win.draw(*debug_input);
-    player->draw(window_);
+    player->draw(window);
 }
