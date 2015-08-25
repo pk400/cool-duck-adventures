@@ -3,10 +3,15 @@
 
 MenuState::MenuState() {
     addButtons();
+
+    bgTexture_.loadFromFile("./assets/tempMenuBG.png");
+
+    bgSprite_.setTexture(bgTexture_);
+    bgSprite_.setTextureRect(sf::IntRect(1024, 0, -1024, 576));
+    bgSprite_.setScale(0.9f, 0.9f);
 }
 
 void MenuState::addButtons() {
-    int inc = 0;
     float startPosX = 100.f;
     float startPosY = 100.f;
     sf::Vector2f pos(startPosX, startPosY);
@@ -17,8 +22,9 @@ void MenuState::addButtons() {
     buttons_.push_back(new sf::Text("Exit"    , font, 30));
 
     for(auto btn : buttons_) {
+        btn->setStyle(sf::Text::Bold);
         btn->setPosition(pos);
-        pos.y += 40.f;
+        pos.y += 60.f;
     }
 }
 
@@ -37,8 +43,8 @@ int MenuState::processInput(sf::Event event, sf::Vector2i mouse, float dt) {
 
     if(event.type == sf::Event::MouseButtonPressed && event.mouseButton.button == sf::Mouse::Left) {
         if(checkButtonBoundaries(START  , sf::Vector2f(mouse))) return 1;
-        if(checkButtonBoundaries(OPTIONS, sf::Vector2f(mouse))) return 1;
-        if(checkButtonBoundaries(HELP   , sf::Vector2f(mouse))) return 1;
+        if(checkButtonBoundaries(OPTIONS, sf::Vector2f(mouse))) return 0;
+        if(checkButtonBoundaries(HELP   , sf::Vector2f(mouse))) return 0;
         if(checkButtonBoundaries(EXIT   , sf::Vector2f(mouse))) return -1;
     }
 
@@ -48,9 +54,8 @@ int MenuState::processInput(sf::Event event, sf::Vector2i mouse, float dt) {
 void MenuState::update() {
 }
 
-
-
 void MenuState::render(sf::RenderWindow& window) {
+    window.draw(bgSprite_);
     for(auto btn : buttons_) {
         window.draw(*btn);
         btn->setColor(sf::Color::White);

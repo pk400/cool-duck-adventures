@@ -7,6 +7,10 @@
 class PlayState : public State {
 private:
     Player* player;
+    sf::Texture bgTexture_;
+    sf::Texture platTexture_;
+    sf::Sprite bgSprite_;
+    vector<sf::Sprite> platSprites_;
     sf::Text* debug_input;
 public:
     PlayState();

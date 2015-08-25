@@ -12,6 +12,8 @@ private:
         EXIT
     };
     vector<sf::Text*> buttons_;
+    sf::Texture bgTexture_;
+    sf::Sprite bgSprite_;
 public:
     MenuState();
     void addButtons();
