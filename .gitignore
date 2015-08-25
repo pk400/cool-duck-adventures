@@ -49,3 +49,6 @@ Temporary Items
 *.layout
 *.cbp
 *.gitattributes
+
+# SFML STUFF
+SFML
