@@ -18,9 +18,14 @@ private:
     PlayerState ps;
 public:
     Player();
-    void update();
+    void update(float dt);
     void draw(sf::RenderWindow& win);
-    void handleInput(float dt);
+    void handleInput();
+    PlayerState getPlayerState() { return ps; }
+    sf::Vector2f getVelocity() { return velocity; }
+    sf::Vector2f getGravity() { return gravity; }
 };
+
+ostream& operator<<(ostream& out, Player& player);
 
 #endif // PLAYER_HPP

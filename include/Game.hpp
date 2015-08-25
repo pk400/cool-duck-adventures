@@ -8,15 +8,19 @@ class Game {
 private:
     sf::RenderWindow window_;
     GSM* gsm;
-    int numFrames;
     sf::Font font;
-    sf::Text fps_text;
+    sf::Text debugBox_;
 public:
+    int numFrames;
+    float dt;
     Game();
     void run();
-    void handleEvents(float);
-    void update();
+    void handleEvents();
+    void update(float dt);
     void render();
+    sf::RenderWindow& getContextWindow() { return window_; }
 };
+
+ostream& operator<<(ostream& out, Game& game);
 
 #endif // GAME_HPP

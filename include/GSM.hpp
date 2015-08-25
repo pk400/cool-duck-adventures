@@ -12,10 +12,13 @@ public:
     GSM();
     void pushState(State* s);
     void popState();
-    int getNumberOfStates();
-    int processInputFromState(sf::Event event, sf::Vector2i mouse, float dt);
-    void updateTopState();
+    int processInputFromState(sf::Event event, sf::Vector2i mouse);
+    void updateTopState(float dt);
     void renderTopState(sf::RenderWindow& window);
+    State*& getTopState() { return states_.top(); }
+    int getNumberOfStates();
 };
+
+ostream& operator<<(ostream& out, GSM& gsm);
 
 #endif // GSM_HPP

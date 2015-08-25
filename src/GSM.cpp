@@ -38,8 +38,8 @@ int GSM::getNumberOfStates() {
     return states_.size();
 }
 
-int GSM::processInputFromState(sf::Event event, sf::Vector2i mouse, float dt) {
-    switch(states_.top()->processInput(event, mouse, dt)) {
+int GSM::processInputFromState(sf::Event event, sf::Vector2i mouse) {
+    switch(states_.top()->processInput(event, mouse)) {
         case -1: {
             return -1;
             break;
@@ -61,10 +61,18 @@ int GSM::processInputFromState(sf::Event event, sf::Vector2i mouse, float dt) {
     return 0;
 }
 
-void GSM::updateTopState() {
-    states_.top()->update();
+void GSM::updateTopState(float dt) {
+    states_.top()->update(dt);
 }
 
 void GSM::renderTopState(sf::RenderWindow& window) {
     states_.top()->render(window);
 }
+
+ostream& operator<<(ostream& out, GSM& gsm) {
+    out << setw(16) << "GSM Size" << gsm.getNumberOfStates() << " state(s)" << '\n';
+    out << *gsm.getTopState();
+    return out;
+}
+
+

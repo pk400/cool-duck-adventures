@@ -28,7 +28,7 @@ void MenuState::addButtons() {
     }
 }
 
-int MenuState::processInput(sf::Event event, sf::Vector2i mouse, float dt) {
+int MenuState::processInput(sf::Event event, sf::Vector2i mouse) {
     if(checkButtonBoundaries(START, sf::Vector2f(mouse)))
         onMouseHover(START, sf::Vector2f(mouse));
 
@@ -51,7 +51,7 @@ int MenuState::processInput(sf::Event event, sf::Vector2i mouse, float dt) {
     return 0;
 }
 
-void MenuState::update() {
+void MenuState::update(float dt) {
 }
 
 void MenuState::render(sf::RenderWindow& window) {
@@ -78,4 +78,8 @@ bool MenuState::checkButtonBoundaries(int key, sf::Vector2f mouse) {
 void MenuState::onMouseHover(int key, sf::Vector2f mouse) {
     sf::Text* btn = buttons_.at(key);
     btn->setColor(sf::Color::Red);
+}
+
+void MenuState::toString(ostream& out) const {
+    out << setw(16) << "Current State" << "Menustate" << '\n';
 }

@@ -17,9 +17,10 @@ private:
 public:
     MenuState();
     void addButtons();
-    int processInput(sf::Event event, sf::Vector2i mouse, float dt);
-    void update();
+    int processInput(sf::Event event, sf::Vector2i mouse);
+    void update(float dt);
     void render(sf::RenderWindow& window);
+    void toString(ostream& out) const;
 
     // Button Manager
     bool checkButtonBoundaries(int key, sf::Vector2f mouse);
