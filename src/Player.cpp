@@ -5,7 +5,7 @@
 Player::Player() :
     position((WINDOW_WIDTH / 2) - 32, (WINDOW_HEIGHT - 32)),
     velocity(0.5f, 0.f),
-    gravity(0.f, -2.f),
+    gravity(0.f, 5.f),
     isStanding(false),
     isMovingLeft(false),
     isMovingRight(false),
@@ -101,6 +101,13 @@ void Player::moveRight(float dt) {
 
 void Player::jump(float dt) {
     stateText += "Jump";
+    float jumpSpeed = 5.f;
+
+    if(position.y < (WINDOW_HEIGHT - 32.f) - 20.f) {
+        position.y += jumpSpeed;
+    } else {
+        position.y -= jumpSpeed;
+    }
 }
 
 ostream& operator<<(ostream& out, Player& player) {
