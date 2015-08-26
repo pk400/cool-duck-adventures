@@ -4,12 +4,13 @@
 
 Player::Player() :
     position((WINDOW_WIDTH / 2) - 32, (WINDOW_HEIGHT - 32)),
-    velocity(0.5f, 0.f),
-    gravity(0.f, 5.f),
+    velocity(10.f, 0.f),
+    gravity(0.f, 50.f),
     isStanding(false),
     isMovingLeft(false),
     isMovingRight(false),
-    isJumping(false) {
+    isJumping(false),
+    isAtVerticalPeak(false) {
 
     texture.loadFromFile("./assets/spritesheet.png", sf::IntRect(0, 32, 32, 32));
     sprite.setTexture(texture);
@@ -25,46 +26,23 @@ void Player::update(float dt) {
     }
     if(isMovingLeft) {
         moveLeft(dt);
-    }
-    if(isMovingRight) {
+    } else if(isMovingRight) {
         moveRight(dt);
+    } else {
+        stateText += "Standing";
     }
-
-    /*switch(ps) {
-        case MOVING_LEFT: {
-            position.x -= (velocity.x * dt);
-            velocity.x  += pow(position.x * dt, 1.5);
-            if(velocity.x > maxSpeed)
-                velocity.x = maxSpeed;
-            break;
-        }
-        case MOVING_RIGHT: {
-            position.x += (velocity.x * dt);
-            velocity.x  += pow(position.x * dt, 1.5);
-            if(velocity.x > maxSpeed)
-                velocity.x = maxSpeed;
-            break;
-        }
-        case JUMPING: {
-
-            break;
-        }
-        case STANDING: {
-            velocity.x = 0.f;
-            break;
-        }
-    }*/
 
     if(position.x < 5.f)
         position.x = 5.f;
     if(position.x > WINDOW_WIDTH - 5.f)
         position.x = WINDOW_WIDTH - 5.f;
+    if(position.y > (WINDOW_HEIGHT - 32.f))
+        position.y = WINDOW_HEIGHT - 32.f;
     sprite.setPosition(position);
 
     isStanding = false;
     isMovingLeft = false;
     isMovingRight = false;
-    isJumping = false;
 }
 
 void Player::draw(sf::RenderWindow& win) {
@@ -76,10 +54,11 @@ void Player::handleInput() {
         isMovingLeft = true;
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
         isMovingRight = true;
-    } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        isJumping = true;
     } else {
         isStanding = true;
+    }
+    if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
+        isJumping = true;
     }
 }
 
@@ -103,11 +82,26 @@ void Player::jump(float dt) {
     stateText += "Jump";
     float jumpSpeed = 5.f;
 
-    if(position.y < (WINDOW_HEIGHT - 32.f) - 20.f) {
-        position.y += jumpSpeed;
+    if(!isAtVerticalPeak) {
+        velocity.y -= pow(jumpSpeed, 2.3);
+        if(position.y < (WINDOW_HEIGHT - 32.f) - 20.f) {
+            isAtVerticalPeak = true;
+            position.y = (WINDOW_HEIGHT - 32.f) - 20.f;
+        }
     } else {
-        position.y -= jumpSpeed;
+        velocity.y += pow(jumpSpeed, 2.3);
+        if(position.y >= (WINDOW_HEIGHT - 32.f)){
+            isAtVerticalPeak = false;
+            isJumping = false;
+            velocity.y = 0.f;
+        }
     }
+
+    if(isMovingLeft)
+        position.x -= (velocity.x * dt);
+    if(isMovingRight)
+        position.x += (velocity.x * dt);
+    position.y += (velocity.y * dt);
 }
 
 ostream& operator<<(ostream& out, Player& player) {

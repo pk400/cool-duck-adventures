@@ -29,8 +29,7 @@ void Game::run() {
 
         handleEvents();
         update(dt);
-
-        this->render();
+        render();
     }
 }
 

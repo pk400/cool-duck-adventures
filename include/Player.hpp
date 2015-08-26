@@ -15,12 +15,13 @@ private:
     sf::Vector2f position;
     sf::Vector2f velocity;
     sf::Vector2f gravity;
-    float maxSpeed = 150.f;
+    float maxSpeed = 200.f;
     string stateText;
     bool isStanding;
     bool isMovingLeft;
     bool isMovingRight;
     bool isJumping;
+    bool isAtVerticalPeak;
 public:
     Player();
     void update(float dt);
