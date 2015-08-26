@@ -5,7 +5,7 @@
 
 class State;
 
-enum PlayerState { STANDING, MOVING_LEFT, MOVING_RIGHT, JUMPING };
+//enum PlayerState { STANDING, MOVING_LEFT, MOVING_RIGHT, JUMPING };
 
 class Player {
 private:
@@ -15,15 +15,25 @@ private:
     sf::Vector2f position;
     sf::Vector2f velocity;
     sf::Vector2f gravity;
-    PlayerState ps;
+    float maxSpeed = 150.f;
+    string stateText;
+    bool isStanding;
+    bool isMovingLeft;
+    bool isMovingRight;
+    bool isJumping;
 public:
     Player();
     void update(float dt);
     void draw(sf::RenderWindow& win);
     void handleInput();
-    PlayerState getPlayerState() { return ps; }
+    string getPlayerState() { return stateText; }
+    sf::Vector2f getPosition() { return position; }
     sf::Vector2f getVelocity() { return velocity; }
     sf::Vector2f getGravity() { return gravity; }
+
+    void moveLeft(float dt);
+    void moveRight(float dt);
+    void jump(float dt);
 };
 
 ostream& operator<<(ostream& out, Player& player);

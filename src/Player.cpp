@@ -5,7 +5,11 @@
 Player::Player() :
     position((WINDOW_WIDTH / 2) - 32, (WINDOW_HEIGHT - 32)),
     velocity(0.5f, 0.f),
-    gravity(0.f, -2.f) {
+    gravity(0.f, -2.f),
+    isStanding(false),
+    isMovingLeft(false),
+    isMovingRight(false),
+    isJumping(false) {
 
     texture.loadFromFile("./assets/spritesheet.png", sf::IntRect(0, 32, 32, 32));
     sprite.setTexture(texture);
@@ -14,9 +18,19 @@ Player::Player() :
 }
 
 void Player::update(float dt) {
-    float maxSpeed = 150.f;
+    stateText = "";
 
-    switch(ps) {
+    if(isJumping) {
+        jump(dt);
+    }
+    if(isMovingLeft) {
+        moveLeft(dt);
+    }
+    if(isMovingRight) {
+        moveRight(dt);
+    }
+
+    /*switch(ps) {
         case MOVING_LEFT: {
             position.x -= (velocity.x * dt);
             velocity.x  += pow(position.x * dt, 1.5);
@@ -31,14 +45,26 @@ void Player::update(float dt) {
                 velocity.x = maxSpeed;
             break;
         }
-        case JUMPING:
+        case JUMPING: {
+
+            break;
+        }
         case STANDING: {
             velocity.x = 0.f;
             break;
         }
-    }
+    }*/
 
+    if(position.x < 5.f)
+        position.x = 5.f;
+    if(position.x > WINDOW_WIDTH - 5.f)
+        position.x = WINDOW_WIDTH - 5.f;
     sprite.setPosition(position);
+
+    isStanding = false;
+    isMovingLeft = false;
+    isMovingRight = false;
+    isJumping = false;
 }
 
 void Player::draw(sf::RenderWindow& win) {
@@ -47,31 +73,45 @@ void Player::draw(sf::RenderWindow& win) {
 
 void Player::handleInput() {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-        ps = MOVING_LEFT;
+        isMovingLeft = true;
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-        ps = MOVING_RIGHT;
+        isMovingRight = true;
     } else if(sf::Keyboard::isKeyPressed(sf::Keyboard::Space)) {
-        ps = JUMPING;
+        isJumping = true;
     } else {
-        ps = STANDING;
+        isStanding = true;
     }
+}
+
+void Player::moveLeft(float dt) {
+    stateText += "Left";
+    position.x -= (velocity.x * dt);
+    velocity.x  += pow(position.x * dt, 1.5);
+    if(velocity.x > maxSpeed)
+        velocity.x = maxSpeed;
+}
+
+void Player::moveRight(float dt) {
+    stateText += "Right";
+    position.x += (velocity.x * dt);
+    velocity.x  += pow(position.x * dt, 1.5);
+    if(velocity.x > maxSpeed)
+        velocity.x = maxSpeed;
+}
+
+void Player::jump(float dt) {
+    stateText += "Jump";
 }
 
 ostream& operator<<(ostream& out, Player& player) {
     out << setw(16) << "Player" << "Yes" << '\n';
+    out << setw(16) << "Position";
+    out << setw(6) << player.getPosition().x << ' ' << player.getPosition().y << '\n';
     out << setw(16) << "Velocity";
     out << setw(6) << player.getVelocity().x << ' ' << player.getVelocity().y << '\n';
     out << setw(16) << "Gravity";
     out << setw(6) << player.getGravity().x << ' ' << player.getGravity().y << '\n';
-    out << setw(16) << "Player Input";
-
-    switch(player.getPlayerState()) {
-        case 0: out << "Idle"; break;
-        case 1: out << "M. Left"; break;
-        case 2: out << "M. Right"; break;
-        case 3: out << "Jumping"; break;
-    }
-    out << '\n';
+    out << setw(16) << "Player Input" << player.getPlayerState() << '\n';
 
     return out;
 }
