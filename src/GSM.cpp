@@ -38,7 +38,7 @@ int GSM::getNumberOfStates() {
     return states_.size();
 }
 
-int GSM::processInputFromState(sf::Event event, sf::Vector2i mouse) {
+int GSM::handleStateEvent(sf::Event event, sf::Vector2i mouse) {
     switch(states_.top()->processInput(event, mouse)) {
         case -1: {
             return -1;
@@ -61,7 +61,7 @@ int GSM::processInputFromState(sf::Event event, sf::Vector2i mouse) {
     return 0;
 }
 
-void GSM::updateTopState(float dt) {
+void GSM::updateState(float dt) {
     states_.top()->update(dt);
 }
 

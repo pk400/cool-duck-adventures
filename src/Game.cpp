@@ -2,26 +2,25 @@
 #include <iostream>
 #include <sstream>
 
-Game::Game() :
-    numFrames(0),
-    dt(0.f) {
-    window_.create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE, sf::Style::Titlebar | sf::Style::Close);
-    window_.setVerticalSyncEnabled(true);
-    window_.setFramerateLimit(60);
+Game::Game()
+    : window(new sf::RenderWindow()), gsm(new GSM()), numFrames(0), dt(0.f) {
+    window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE, sf::Style::Titlebar | sf::Style::Close);
+    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(60);
 
     font.loadFromFile("./assets/ubuntu-font-family-0.83/UbuntuMono-R.ttf");
 
     debugBox_.setFont(font);
     debugBox_.setOrigin(0.f, 0.f);
     debugBox_.setCharacterSize(12);
-
-    gsm = new GSM();
+    //gsm = new GSM();
 }
 
-void Game::run() {
+
+int Game::exec() {
     sf::Clock clock;
 
-    while(window_.isOpen()) {
+    while(window->isOpen()) {
         dt = clock.restart().asSeconds();
 
         if(dt > 0.15f)
@@ -31,26 +30,38 @@ void Game::run() {
         update(dt);
         render();
     }
+
+    return EXIT_SUCCESS;
 }
 
 void Game::handleEvents() {
     sf::Event event;
-    while(window_.pollEvent(event)) {
-        if(event.type == sf::Event::Closed)
-            window_.close();
+
+    while(window->pollEvent(event)) {
+        switch(event.type) {
+        case sf::Event::Closed:
+            window->close();
+        case sf::Event::LostFocus:
+        case sf::Event::GainedFocus:
+        default:
+            break;
+        }
     }
 
-    switch(gsm->processInputFromState(event, sf::Mouse::getPosition(window_))) {
+    switch(gsm->handleStateEvent(event, sf::Mouse::getPosition(*window))) {
         case -1: {
-            window_.close();
+            window->close();
+            break;
+        default:
             break;
         }
     }
 }
 
 void Game::update(float dt) {
-    this->gsm->updateTopState(dt);
+    gsm->updateState(dt);
 
+    setupDebugBox();
     stringstream ss;
     ss << *this << *gsm;
 
@@ -59,20 +70,23 @@ void Game::update(float dt) {
 }
 
 void Game::render() {
-    window_.clear();
+    window->clear();
 
-    gsm->renderTopState(window_);
-    window_.draw(debugBox_);
+    gsm->renderTopState(*window);
+    window->draw(debugBox_);
 
-    window_.display();
+    window->display();
+}
+
+void Game::setupDebugBox() {
 }
 
 ostream& operator<<(ostream& out, Game& game) {
-    out << fixed << left << setprecision(2);
-    out << setw(16) << "Frame"       << setw(15) << game.numFrames++ << '\n';
-    out << setw(16) << "Delta Time"  << game.dt << '\n';
-    out << setw(16) << "Mouse X"     << sf::Mouse::getPosition(game.getContextWindow()).x << '\n';
-    out << setw(16) << "Mouse Y"     << sf::Mouse::getPosition(game.getContextWindow()).y << '\n';
+    out << fixed << left << setprecision(2)
+        << setw(16) << "Frame"       << setw(15) << game.numFrames++ << '\n'
+        << setw(16) << "Delta Time"  << game.dt << '\n'
+        << setw(16) << "Mouse X"     << sf::Mouse::getPosition(game.getContextWindow()).x << '\n'
+        << setw(16) << "Mouse Y"     << sf::Mouse::getPosition(game.getContextWindow()).y << '\n';
 
     return out;
 }

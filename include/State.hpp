@@ -9,7 +9,7 @@ using namespace std;
 const sf::Time FPS = sf::seconds(1.f/60.f);
 
 enum DebugEnum { DEFAULT, MENU, PLAY };
-const DebugEnum DEBUG_MODE      = PLAY;
+const DebugEnum DEBUG_MODE      = DEFAULT;
 const int WINDOW_WIDTH          = 800;
 const int WINDOW_HEIGHT         = 480;
 const int DEBUG_TEXT_OFFSET     = 100;

@@ -12,8 +12,8 @@ public:
     GSM();
     void pushState(State* s);
     void popState();
-    int processInputFromState(sf::Event event, sf::Vector2i mouse);
-    void updateTopState(float dt);
+    int handleStateEvent(sf::Event event, sf::Vector2i mouse);
+    void updateState(float dt);
     void renderTopState(sf::RenderWindow& window);
     State*& getTopState() { return states_.top(); }
     int getNumberOfStates();
