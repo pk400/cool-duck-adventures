@@ -14,7 +14,6 @@ private:
     sf::Text* debug_input;
 public:
     PlayState();
-    void loadDebugText();
     int processInput(sf::Event event, sf::Vector2i mouse);
     void update(float dt);
     void render(sf::RenderWindow& window);

@@ -20,11 +20,6 @@ PlayState::PlayState() {
     }
 }
 
-void PlayState::loadDebugText() {
-    debug_input = new sf::Text("Input: ", font, DEBUG_TEXT_SIZE);
-    debug_input->setPosition(5.f, 5.f);
-}
-
 int PlayState::processInput(sf::Event event, sf::Vector2i mouse) {
     if(sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
         return 2;
@@ -47,7 +42,7 @@ void PlayState::render(sf::RenderWindow& window) {
     player->draw(window);
 }
 void PlayState::toString(ostream& out) const {
-    out << setw(16) << "Current State" << "Playstate" << '\n';
+    out << setw(6) << "Current State" << "Playstate";
     out << *player;
 }
 

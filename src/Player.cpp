@@ -105,14 +105,14 @@ void Player::jump(float dt) {
 }
 
 ostream& operator<<(ostream& out, Player& player) {
-    out << setw(16) << "Player" << "Yes" << '\n';
-    out << setw(16) << "Position";
-    out << setw(6) << player.getPosition().x << ' ' << player.getPosition().y << '\n';
-    out << setw(16) << "Velocity";
-    out << setw(6) << player.getVelocity().x << ' ' << player.getVelocity().y << '\n';
-    out << setw(16) << "Gravity";
-    out << setw(6) << player.getGravity().x << ' ' << player.getGravity().y << '\n';
-    out << setw(16) << "Player Input" << player.getPlayerState() << '\n';
+    out << setw(6) << "Player" << "Yes";
+    out << setw(6) << "Position";
+    out << setw(6) << player.getPosition().x << ' ' << player.getPosition().y;
+    out << setw(6) << "Velocity";
+    out << setw(6) << player.getVelocity().x << ' ' << player.getVelocity().y;
+    out << setw(6) << "Gravity";
+    out << setw(6) << player.getGravity().x << ' ' << player.getGravity().y;
+    out << setw(6) << "Player Input" << player.getPlayerState();
 
     return out;
 }

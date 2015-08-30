@@ -70,7 +70,8 @@ void GSM::renderTopState(sf::RenderWindow& window) {
 }
 
 ostream& operator<<(ostream& out, GSM& gsm) {
-    out << setw(16) << "GSM Size" << gsm.getNumberOfStates() << " state(s)" << '\n';
+    out << setw(6) << '\n'
+        << "GSM Size" << gsm.getNumberOfStates() << " state(s)";
     out << *gsm.getTopState();
     return out;
 }

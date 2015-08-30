@@ -12,11 +12,6 @@ enum DebugEnum { DEFAULT, MENU, PLAY };
 const DebugEnum DEBUG_MODE      = DEFAULT;
 const int WINDOW_WIDTH          = 800;
 const int WINDOW_HEIGHT         = 480;
-const int DEBUG_TEXT_OFFSET     = 100;
-const int DEBUG_TEXT_SIZE       = 12;
-const int DEBUG_TEXT_PADDING    = 12;
-const std::string GAME_TITLE    = "Platformer";
-const std::string DEBUG_STR     = "State: ";
 
 class State {
 protected:

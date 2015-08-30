@@ -3,8 +3,10 @@
 #include <sstream>
 
 Game::Game()
-    : window(new sf::RenderWindow()), gsm(new GSM()), numFrames(0), dt(0.f) {
-    window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT), GAME_TITLE, sf::Style::Titlebar | sf::Style::Close);
+    : window(new sf::RenderWindow()), gamewidth(800), gameheight(480),
+    gsm(new GSM()), frames(0), dt(0.f) {
+    window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
+                   "Platformer", sf::Style::Titlebar| sf::Style::Close);
     window->setVerticalSyncEnabled(true);
     window->setFramerateLimit(60);
 
@@ -62,11 +64,6 @@ void Game::update(float dt) {
     gsm->updateState(dt);
 
     setupDebugBox();
-    stringstream ss;
-    ss << *this << *gsm;
-
-    debugBox_.setString(ss.str());
-    debugBox_.setPosition(WINDOW_WIDTH - debugBox_.getGlobalBounds().width - 10.f, 10.f);
 }
 
 void Game::render() {
@@ -79,14 +76,15 @@ void Game::render() {
 }
 
 void Game::setupDebugBox() {
-}
+    stringstream debugline;
 
-ostream& operator<<(ostream& out, Game& game) {
-    out << fixed << left << setprecision(2)
-        << setw(16) << "Frame"       << setw(15) << game.numFrames++ << '\n'
-        << setw(16) << "Delta Time"  << game.dt << '\n'
-        << setw(16) << "Mouse X"     << sf::Mouse::getPosition(game.getContextWindow()).x << '\n'
-        << setw(16) << "Mouse Y"     << sf::Mouse::getPosition(game.getContextWindow()).y << '\n';
+    debugline << fixed << left << setprecision(2)
+        << "F:"  << setw(6) << frames++
+        << "DT:" << setw(6) << dt
+        << "MX:" << setw(6) << sf::Mouse::getPosition(*window).x
+        << "MY:" << setw(6) << sf::Mouse::getPosition(*window).y
+        << *gsm;
 
-    return out;
+    debugBox_.setString(debugline.str());
+    debugBox_.setPosition(10.f, 10.f);
 }
