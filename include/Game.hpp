@@ -16,9 +16,9 @@ public:
     void render();
     void setupDebugBox();
 private:
-    sf::RenderWindow* window;
     const int gamewidth;
     const int gameheight;
+    sf::RenderWindow* window;
     GSM* gsm;
     sf::Font font;
     sf::Text debugBox_;

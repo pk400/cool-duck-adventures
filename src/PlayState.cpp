@@ -39,10 +39,14 @@ void PlayState::render(sf::RenderWindow& window) {
         window.draw(sprite);
     }
 
+    // TODO: fix player views
+    sf::View view(player->getPosition(), sf::Vector2f(533.33, 320));
+    window.setView(view);
+
     player->draw(window);
 }
 void PlayState::toString(ostream& out) const {
-    out << setw(6) << "Current State" << "Playstate";
+    out << setw(16) << "Current State" << "Playstate" << '\n';
     out << *player;
 }
 

@@ -81,5 +81,5 @@ void MenuState::onMouseHover(int key, sf::Vector2f mouse) {
 }
 
 void MenuState::toString(ostream& out) const {
-    out << setw(6) << "Current State" << "Menustate";
+    out << setw(16) << "Current State" << "Menustate" << '\n';
 }

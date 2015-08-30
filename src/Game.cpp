@@ -15,7 +15,6 @@ Game::Game()
     debugBox_.setFont(font);
     debugBox_.setOrigin(0.f, 0.f);
     debugBox_.setCharacterSize(12);
-    //gsm = new GSM();
 }
 
 
@@ -64,6 +63,8 @@ void Game::update(float dt) {
     gsm->updateState(dt);
 
     setupDebugBox();
+
+    frames++;
 }
 
 void Game::render() {
@@ -79,12 +80,12 @@ void Game::setupDebugBox() {
     stringstream debugline;
 
     debugline << fixed << left << setprecision(2)
-        << "F:"  << setw(6) << frames++
-        << "DT:" << setw(6) << dt
-        << "MX:" << setw(6) << sf::Mouse::getPosition(*window).x
-        << "MY:" << setw(6) << sf::Mouse::getPosition(*window).y
+        << setw(16) << "Frame"       << setw(15) << frames << '\n'
+        << setw(16) << "Delta Time"  << dt << '\n'
+        << setw(16) << "Mouse X"     << sf::Mouse::getPosition(*window).x << '\n'
+        << setw(16) << "Mouse Y"     << sf::Mouse::getPosition(*window).y << '\n'
         << *gsm;
 
     debugBox_.setString(debugline.str());
-    debugBox_.setPosition(10.f, 10.f);
+    debugBox_.setPosition(0.f, 0.f);
 }
