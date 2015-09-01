@@ -13,6 +13,7 @@ private:
     vector<sf::Sprite> platSprites_;
     sf::Text* debug_input;
 public:
+    sf::View view; // Temp view
     PlayState();
     int processInput(sf::Event event, sf::Vector2i mouse);
     void update(float dt);
