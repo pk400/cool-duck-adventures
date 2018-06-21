@@ -1,6 +1,7 @@
 #include "../include/State.hpp"
 #include "../include/Player.hpp"
 #include <sstream>
+#include <math.h>
 
 Player::Player() :
     position((WINDOW_WIDTH / 2) - 32, (WINDOW_HEIGHT - 32)),
