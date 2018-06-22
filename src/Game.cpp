@@ -1,4 +1,4 @@
-#include "../include/Game.hpp"
+#include "Game.hpp"
 #include <iostream>
 #include <sstream>
 
@@ -17,6 +17,14 @@ Game::Game()
     debugBox_.setCharacterSize(12);
 }
 
+Game::Game(int w_width, int w_height)
+    : gamewidth(w_width), gameheight(w_height), gsm(new GSM()), frames(0), dt(0.f) {
+    window = new sf::RenderWindow();
+    window->create(sf::VideoMode(gamewidth, gameheight), "Cool Duck Adventures!",
+        sf::Style::Titlebar | sf::Style::Close);
+    window->setVerticalSyncEnabled(true);
+    window->setFramerateLimit(60);
+}
 
 int Game::exec() {
     sf::Clock clock;

@@ -1,5 +1,5 @@
-#include "../include/State.hpp"
-#include "../include/Player.hpp"
+#include "State.hpp"
+#include "Player.hpp"
 #include <sstream>
 #include <math.h>
 

@@ -1,5 +1,5 @@
-#include "../include/Game.hpp"
-#include "../include/MenuState.hpp"
+#include "Game.hpp"
+#include "MenuState.hpp"
 
 MenuState::MenuState() {
     addButtons();
@@ -58,7 +58,7 @@ void MenuState::render(sf::RenderWindow& window) {
     window.draw(bgSprite_);
     for(auto btn : buttons_) {
         window.draw(*btn);
-        btn->setColor(sf::Color::White);
+        btn->setFillColor(sf::Color::White);
     }
 }
 
@@ -77,7 +77,7 @@ bool MenuState::checkButtonBoundaries(int key, sf::Vector2f mouse) {
 
 void MenuState::onMouseHover(int key, sf::Vector2f mouse) {
     sf::Text* btn = buttons_.at(key);
-    btn->setColor(sf::Color::Red);
+    btn->setFillColor(sf::Color::Red);
 }
 
 void MenuState::toString(ostream& out) const {

@@ -1,5 +1,5 @@
-#include "../include/Game.hpp"
-#include "../include/PlayState.hpp"
+#include "Game.hpp"
+#include "PlayState.hpp"
 
 PlayState::PlayState() {
     player = new Player();

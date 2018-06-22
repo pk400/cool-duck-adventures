@@ -1,4 +1,4 @@
-#include "../include/GSM.hpp"
+#include "GSM.hpp"
 
 State* menustate;
 State* playstate;
