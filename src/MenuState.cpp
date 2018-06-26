@@ -79,7 +79,3 @@ void MenuState::onMouseHover(int key, sf::Vector2f mouse) {
     sf::Text* btn = buttons_.at(key);
     btn->setFillColor(sf::Color::Red);
 }
-
-void MenuState::toString(ostream& out) const {
-    out << setw(16) << "Current State" << "Menustate" << '\n';
-}

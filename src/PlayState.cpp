@@ -51,9 +51,3 @@ void PlayState::render(sf::RenderWindow& window) {
 
     player->draw(window);
 }
-void PlayState::toString(ostream& out) const {
-    out << setw(16) << "Current State" << "Playstate" << '\n';
-    out << *player;
-}
-
-

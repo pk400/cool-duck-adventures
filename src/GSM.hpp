@@ -19,6 +19,4 @@ public:
     int getNumberOfStates();
 };
 
-ostream& operator<<(ostream& out, GSM& gsm);
-
 #endif // GSM_HPP

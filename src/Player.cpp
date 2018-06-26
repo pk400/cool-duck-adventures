@@ -20,8 +20,6 @@ Player::Player() :
 }
 
 void Player::update(float dt) {
-    stateText = "";
-
     if(isJumping) {
         jump(dt);
     }
@@ -29,8 +27,6 @@ void Player::update(float dt) {
         moveLeft(dt);
     } else if(isMovingRight) {
         moveRight(dt);
-    } else {
-        stateText += "Standing";
     }
 
     if(position.x < 5.f)
@@ -67,7 +63,6 @@ void Player::handleInput() {
 }
 
 void Player::moveLeft(float dt) {
-    stateText += "Left";
     position.x -= (velocity.x * dt);
     velocity.x  += pow(position.x * dt, 1.5);
     if(velocity.x > maxSpeed)
@@ -75,7 +70,6 @@ void Player::moveLeft(float dt) {
 }
 
 void Player::moveRight(float dt) {
-    stateText += "Right";
     position.x += (velocity.x * dt);
     velocity.x  += pow(position.x * dt, 1.5);
     if(velocity.x > maxSpeed)
@@ -83,7 +77,6 @@ void Player::moveRight(float dt) {
 }
 
 void Player::jump(float dt) {
-    stateText += "Jump";
     float jumpSpeed = 5.f;
 
     if(!isAtVerticalPeak) {
@@ -106,16 +99,4 @@ void Player::jump(float dt) {
     if(isMovingRight)
         position.x += (velocity.x * dt);
     position.y += (velocity.y * dt);
-}
-
-ostream& operator<<(ostream& out, Player& player) {
-    out << setw(16) << "Position";
-    out << setw(6) << player.getPosition().x << ' ' << player.getPosition().y << '\n';
-    out << setw(16) << "Velocity";
-    out << setw(6) << player.getVelocity().x << ' ' << player.getVelocity().y << '\n';
-    out << setw(16) << "Gravity";
-    out << setw(6) << player.getGravity().x << ' ' << player.getGravity().y << '\n';
-    out << setw(16) << "Player Input" << player.getPlayerState() << '\n';
-
-    return out;
 }

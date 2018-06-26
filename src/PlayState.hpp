@@ -13,13 +13,11 @@ private:
     sf::Sprite bgSprite_;
     sf::Sprite mobsprite_;
     vector<sf::Sprite> platSprites_;
-    sf::Text* debug_input;
 public:
     PlayState();
     int processInput(sf::Event event, sf::Vector2i mouse);
     void update(float dt);
     void render(sf::RenderWindow& window);
-    void toString(ostream& out) const;
 };
 
 #endif // PLAYSTATE_HPP
