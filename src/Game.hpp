@@ -2,23 +2,21 @@
 #define GAME_HPP
 
 #include "GSM.hpp"
-#include "Player.hpp"
 
 class Game {
 public:
-    Game();
-    Game(int w_width, int w_height);
-    sf::RenderWindow& getContextWindow()    { return *window; }
-    float dt;
-    int exec();
+    Game(int game_width, int game_height, std::string game_title);
+    int gameRun();
     void handleEvents();
     void update(float dt);
     void render();
+    sf::RenderWindow& getContextWindow()    { return *window; }
 private:
     const int gamewidth;
     const int gameheight;
     sf::RenderWindow* window;
     GSM* gsm;
+    float dt;
 };
 
 #endif // GAME_HPP

@@ -1,26 +1,21 @@
 #include "Game.hpp"
+
 #include <iostream>
 #include <sstream>
 
-Game::Game()
-    : window(new sf::RenderWindow()), gamewidth(800), gameheight(480),
-    gsm(new GSM()), dt(0.f) {
-    window->create(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-                   "Platformer", sf::Style::Titlebar| sf::Style::Close);
-    window->setVerticalSyncEnabled(true);
-    window->setFramerateLimit(60);
-}
-
-Game::Game(int w_width, int w_height)
-    : gamewidth(w_width), gameheight(w_height), gsm(new GSM()), dt(0.f) {
+Game::Game(int game_width, int game_height, std::string game_title)
+    : gamewidth(game_width), gameheight(game_height), gsm(new GSM()), dt(0.f) {
     window = new sf::RenderWindow();
-    window->create(sf::VideoMode(gamewidth, gameheight), "Sprout",
+    window->create(sf::VideoMode(gamewidth, gameheight), game_title,
         sf::Style::Titlebar | sf::Style::Close);
     window->setVerticalSyncEnabled(true);
     window->setFramerateLimit(60);
 }
 
-int Game::exec() {
+/*
+ * Everytime the game goes through a loop, it is counted as one frame.
+ */
+int Game::gameRun() {
     sf::Clock clock;
 
     while(window->isOpen()) {
@@ -67,8 +62,6 @@ void Game::update(float dt) {
 
 void Game::render() {
     window->clear();
-
     gsm->renderTopState(*window);
-
     window->display();
 }
