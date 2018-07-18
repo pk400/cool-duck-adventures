@@ -1,5 +1,5 @@
 #include "src/Game.hpp"
-#include "src/toml.h"
+#include "src/tinytoml/toml.h"
 
 int main() {
 	Settings settings;
