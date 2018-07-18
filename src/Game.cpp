@@ -3,10 +3,10 @@
 #include <iostream>
 #include <sstream>
 
-Game::Game(int game_width, int game_height, std::string game_title)
-    : gamewidth(game_width), gameheight(game_height), gsm(new GSM()), dt(0.f) {
+Game::Game(Settings settings)
+    : gs(settings), gsm(new GSM()), dt(0.f) {
     window = new sf::RenderWindow();
-    window->create(sf::VideoMode(gamewidth, gameheight), game_title,
+    window->create(sf::VideoMode(gs.width, gs.height), gs.title,
         sf::Style::Titlebar | sf::Style::Close);
     window->setVerticalSyncEnabled(true);
     window->setFramerateLimit(60);

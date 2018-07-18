@@ -8,7 +8,7 @@ MenuState::MenuState() {
 
     bgSprite_.setTexture(bgTexture_);
     bgSprite_.setTextureRect(sf::IntRect(1024, 0, -1024, 576));
-    bgSprite_.setScale(0.9f, 0.9f);
+    bgSprite_.setScale(1.f, 1.f);
 }
 
 void MenuState::addButtons() {

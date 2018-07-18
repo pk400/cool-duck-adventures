@@ -1,11 +1,27 @@
 #include "src/Game.hpp"
+#include "src/toml.h"
 
 int main() {
-    int game_width = 800;
-    int game_height = 480;
-    std::string game_title = "Sprout";
+	Settings settings;
 
-    Game game(game_width, game_height, game_title);
+	// Read settings from configuration file
+	std::ifstream ifs("config.toml");
+	toml::ParseResult pr = toml::parse(ifs);
+
+	if (!pr.valid()) {
+	    cout << pr.errorReason << endl;
+	    return 0;
+	}
+
+	const toml::Value& config_data = pr.value;
+
+	settings.title = (config_data.find("game.title"))->as<string>();
+	settings.debug = (config_data.find("game.debug"))->as<bool>();
+	settings.width = (config_data.find("game.width"))->as<int>();
+	settings.height = (config_data.find("game.height"))->as<int>();
+
+	// Initialize game with settings
+    Game game(settings);
 
     return game.gameRun();
 }
