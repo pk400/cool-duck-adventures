@@ -1,15 +1,19 @@
 #include "src/Game.hpp"
 #include "src/tinytoml/toml.h"
+#include <fstream>
+#include <unistd.h>
 
 int main() {
 	Settings settings;
 
-	// Read settings from configuration file
-	std::ifstream ifs("config.toml");
+	// Read settings from configuration file.
+	// File location is relative to the location of the binary after
+	// running make.
+	std::ifstream ifs("../config.toml");
 	toml::ParseResult pr = toml::parse(ifs);
 
 	if (!pr.valid()) {
-	    cout << pr.errorReason << endl;
+	    std::cout << pr.errorReason << std::endl;
 	    return 0;
 	}
 

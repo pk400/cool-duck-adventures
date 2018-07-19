@@ -21,12 +21,13 @@ int Game::gameRun() {
     while(window->isOpen()) {
         dt = clock.restart().asSeconds();
 
-        if(dt > 0.15f)
-            dt = 0.15f;
+        if(dt > 0.015f)
+            dt = 0.015f;
 
         handleEvents();
         update(dt);
         render();
+        std::cout << dt << std::endl;
     }
 
     return EXIT_SUCCESS;

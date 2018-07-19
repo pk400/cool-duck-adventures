@@ -4,7 +4,7 @@
 MenuState::MenuState() {
     addButtons();
 
-    bgTexture_.loadFromFile("./assets/tempMenuBG.png");
+    bgTexture_.loadFromFile("../assets/tempMenuBG.png");
 
     bgSprite_.setTexture(bgTexture_);
     bgSprite_.setTextureRect(sf::IntRect(1024, 0, -1024, 576));

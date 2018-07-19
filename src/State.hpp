@@ -17,7 +17,7 @@ class State {
 protected:
 	sf::Font font;
 	State() {
-		font.loadFromFile("./assets/ubuntu-font-family-0.83/UbuntuMono-R.ttf");
+		font.loadFromFile("../assets/ubuntu-font-family-0.83/UbuntuMono-R.ttf");
 	}
 public:
     virtual int processInput(sf::Event event, sf::Vector2i mouse) = 0;
