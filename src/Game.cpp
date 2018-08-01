@@ -3,13 +3,26 @@
 #include <iostream>
 #include <sstream>
 
-Game::Game(Settings settings)
-    : gs_(settings), gsm_(new GSM()), dt_(0.f) {
+Game::Game(Settings& settings) {
+    gs_ = &settings;
+    gsm_ = new GSM();
+    dt_ = 0.f;
     window_ = new sf::RenderWindow();
-    window_->create(sf::VideoMode(gs_.width, gs_.height), gs_.title,
+}
+
+int Game::setup() {
+    window_->create(sf::VideoMode(gs_->width, gs_->height), gs_->title,
         sf::Style::Titlebar | sf::Style::Close);
-    window_->setVerticalSyncEnabled(gs_.vertical_sync);
-    window_->setFramerateLimit(gs_.frame_rate);
+    window_->setVerticalSyncEnabled(gs_->vertical_sync);
+    window_->setFramerateLimit(gs_->frame_rate);
+
+    // gs_ points to the Settings struct created in Main.cpp, it will be
+    // referenced throughout the project. It should always have the same address
+    // to avoid having to create copies of the exact same object everytime.
+    gsm_->setSettings(gs_);
+
+    // TODO(pk400): Make setup() return an error if setup fails
+    return 0;
 }
 
 /*

@@ -27,8 +27,11 @@ int main() {
 	settings.frame_rate = (config_data.find("game.frame_rate"))->as<int>();
 	settings.vertical_sync = (config_data.find("game.vertical_sync"))->as<bool>();
 
-	// Initialize game with settings
+	// Initialize game variables with setting variables
     Game game(settings);
+
+    // Setup screen with values from settings
+    game.setup();
 
     return game.gameRun();
 }

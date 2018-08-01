@@ -1,19 +1,20 @@
 #ifndef GAME_HPP
 #define GAME_HPP
 
-#include "GSM.hpp"
 #include "Settings.hpp"
+#include "GSM.hpp"
 
 class Game {
 public:
-    Game(Settings settings);
+    Game(Settings& settings);
+    int setup();
     int gameRun();
     void handleEvents();
     void update();
     void render();
     sf::RenderWindow& getContextWindow()    { return *window_; }
 private:
-    Settings gs_;
+    Settings* gs_;
     sf::RenderWindow* window_;
     GSM* gsm_;
     float dt_;
