@@ -3,6 +3,7 @@
 #include <fstream>
 #include <unistd.h>
 
+// Main entry-point to initialize game and load settings.
 int main() {
 	Settings settings;
 
@@ -23,6 +24,8 @@ int main() {
 	settings.debug = (config_data.find("game.debug"))->as<bool>();
 	settings.width = (config_data.find("game.width"))->as<int>();
 	settings.height = (config_data.find("game.height"))->as<int>();
+	settings.frame_rate = (config_data.find("game.frame_rate"))->as<int>();
+	settings.vertical_sync = (config_data.find("game.vertical_sync"))->as<bool>();
 
 	// Initialize game with settings
     Game game(settings);

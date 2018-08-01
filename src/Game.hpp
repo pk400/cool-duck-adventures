@@ -9,14 +9,14 @@ public:
     Game(Settings settings);
     int gameRun();
     void handleEvents();
-    void update(float dt);
+    void update();
     void render();
-    sf::RenderWindow& getContextWindow()    { return *window; }
+    sf::RenderWindow& getContextWindow()    { return *window_; }
 private:
-    Settings gs;
-    sf::RenderWindow* window;
-    GSM* gsm;
-    float dt;
+    Settings gs_;
+    sf::RenderWindow* window_;
+    GSM* gsm_;
+    float dt_;
 };
 
 #endif // GAME_HPP

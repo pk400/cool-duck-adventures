@@ -13,7 +13,7 @@ Player::Player() :
     isJumping(false),
     isAtVerticalPeak(false) {
 
-    texture.loadFromFile("./assets/spritesheet.png", sf::IntRect(0, 32, 32, 32));
+    texture.loadFromFile("../assets/spritesheet.png", sf::IntRect(0, 32, 32, 32));
     sprite.setTexture(texture);
     sprite.setOrigin(0, 32);
     sprite.setPosition(position);

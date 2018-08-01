@@ -4,12 +4,12 @@
 #include <sstream>
 
 Game::Game(Settings settings)
-    : gs(settings), gsm(new GSM()), dt(0.f) {
-    window = new sf::RenderWindow();
-    window->create(sf::VideoMode(gs.width, gs.height), gs.title,
+    : gs_(settings), gsm_(new GSM()), dt_(0.f) {
+    window_ = new sf::RenderWindow();
+    window_->create(sf::VideoMode(gs_.width, gs_.height), gs_.title,
         sf::Style::Titlebar | sf::Style::Close);
-    window->setVerticalSyncEnabled(true);
-    window->setFramerateLimit(60);
+    window_->setVerticalSyncEnabled(gs_.vertical_sync);
+    window_->setFramerateLimit(gs_.frame_rate);
 }
 
 /*
@@ -18,16 +18,15 @@ Game::Game(Settings settings)
 int Game::gameRun() {
     sf::Clock clock;
 
-    while(window->isOpen()) {
-        dt = clock.restart().asSeconds();
+    while(window_->isOpen()) {
+        dt_ = clock.restart().asSeconds();
 
-        if(dt > 0.015f)
-            dt = 0.015f;
+        if(dt_ > 0.015f)
+            dt_ = 0.015f;
 
         handleEvents();
-        update(dt);
+        update();
         render();
-        std::cout << dt << std::endl;
     }
 
     return EXIT_SUCCESS;
@@ -36,10 +35,10 @@ int Game::gameRun() {
 void Game::handleEvents() {
     sf::Event event;
 
-    while(window->pollEvent(event)) {
+    while(window_->pollEvent(event)) {
         switch(event.type) {
         case sf::Event::Closed:
-            window->close();
+            window_->close();
         case sf::Event::LostFocus:
         case sf::Event::GainedFocus:
         default:
@@ -47,9 +46,9 @@ void Game::handleEvents() {
         }
     }
 
-    switch(gsm->handleStateEvent(event, sf::Mouse::getPosition(*window))) {
+    switch(gsm_->handleStateEvent(event, sf::Mouse::getPosition(*window_))) {
         case -1: {
-            window->close();
+            window_->close();
             break;
         default:
             break;
@@ -57,12 +56,12 @@ void Game::handleEvents() {
     }
 }
 
-void Game::update(float dt) {
-    gsm->updateState(dt);
+void Game::update() {
+    gsm_->updateState(dt_);
 }
 
 void Game::render() {
-    window->clear();
-    gsm->renderTopState(*window);
-    window->display();
+    window_->clear();
+    gsm_->renderTopState(*window_);
+    window_->display();
 }

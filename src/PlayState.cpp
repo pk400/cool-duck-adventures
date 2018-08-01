@@ -5,20 +5,20 @@ PlayState::PlayState() {
     player = new Player();
 
     // mobs
-    mobtexture_.loadFromFile("./assets/player.png", sf::IntRect(0, 0, 24, 27));
+    mobtexture_.loadFromFile("../assets/player.png", sf::IntRect(0, 0, 24, 27));
     mobsprite_.setTexture(mobtexture_);
     mobsprite_.setOrigin(24, 27);
     mobsprite_.setPosition(100, WINDOW_HEIGHT - 32);
 
     // backgrounds
-    bgTexture_.loadFromFile("./assets/bg_mountains.png", sf::IntRect(0, 0, 240, 120));
+    bgTexture_.loadFromFile("../assets/bg_mountains.png", sf::IntRect(0, 0, 240, 120));
     bgSprite_.setTexture(bgTexture_);
     bgSprite_.setScale(3.5f, 3.5f);
     bgSprite_.setOrigin(0, 120);
     bgSprite_.setPosition(0, WINDOW_HEIGHT - 32);
 
     // platform
-    platTexture_.loadFromFile("./assets/grass-dirt.png", sf::IntRect(0, 0, 32, 32));
+    platTexture_.loadFromFile("../assets/grass-dirt.png", sf::IntRect(0, 0, 32, 32));
     for(int i = 0; i < 25; i++) {
         sf::Sprite plat;
         plat.setTexture(platTexture_);

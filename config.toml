@@ -1,5 +1,11 @@
 [game]
 title = "sprout-2d"
 debug = false
-width = 1600
-height = 800
+width = 1024
+height = 576
+frame_rate = 60
+vertical_sync = true
+
+[paths]
+assets = "./assets"
+scripts = "./scripts"
