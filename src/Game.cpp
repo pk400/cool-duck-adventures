@@ -19,7 +19,7 @@ int Game::setup() {
     // gs_ points to the Settings struct created in Main.cpp, it will be
     // referenced throughout the project. It should always have the same address
     // to avoid having to create copies of the exact same object everytime.
-    gsm_->setSettings(gs_);
+    gsm_->setSettings(*gs_);
 
     // TODO(pk400): Make setup() return an error if setup fails
     return 0;

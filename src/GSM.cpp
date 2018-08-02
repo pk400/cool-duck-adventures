@@ -25,6 +25,10 @@ GSM::GSM() {
     }
 }
 
+void GSM::setSettings(Settings& s) {
+    settings_ = &s;
+}
+
 void GSM::pushState(State* state) {
     states_.push(state);
 }

@@ -13,7 +13,7 @@ private:
     Settings* settings_;
 public:
     GSM();
-    void setSettings(Settings* s) { settings_ = s; std::cout << "GSM " << s << std::endl; }
+    void setSettings(Settings& s);
     void pushState(State* s);
     void popState();
     int handleStateEvent(sf::Event event, sf::Vector2i mouse);
