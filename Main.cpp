@@ -47,7 +47,7 @@ int main() {
     Game game(settings);
 
     // Setup screen with values from settings
-    if(term_code == 1 && game.setupWindow() == 1){
+    if(game.setupWindow() == 1 && term_code == 1){
     	std::cout << "Window setup error" << std::endl;
     }
 
