@@ -7,7 +7,8 @@
 class Game {
 public:
     Game(Settings& settings);
-    int setup();
+    int setupWindow();
+    int setupGSM();
     int gameRun();
     void handleEvents();
     void update();

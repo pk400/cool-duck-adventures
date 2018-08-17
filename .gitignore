@@ -54,3 +54,12 @@ Temporary Items
 SFML
 *.swp
 run
+
+# CMake Stuff
+bin
+CMakeCache.txt
+CMakeFiles
+cmake_install.cmake
+
+# Executable
+sprout2d
